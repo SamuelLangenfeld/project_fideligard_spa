@@ -42,15 +42,15 @@ export function getStocks() {
     dispatch(getStocksRequest());
 
     let promiseArray = [];
-    let time = 10;
+    let time = 1;
 
     symbols.forEach(symbol => {
-      time += 300;
+      time += 150;
       promiseArray.push(
         new Promise((res, rej) => {
           setTimeout(() => {
             fetch(
-              `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?api_key=${apiKey}`
+              `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?trim_start=2017-11-01&api_key=${apiKey}`
             )
               .then(results => results.json())
               .then(results => res(results));
