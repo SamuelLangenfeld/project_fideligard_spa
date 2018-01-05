@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-class Portfolio extends Component {
+class Transactions extends Component {
   render() {
     return (
       <div>
@@ -37,4 +37,4 @@ class Portfolio extends Component {
   }
 }
 
-export default Portfolio;
+export default Transactions;

@@ -9,18 +9,24 @@ import {
 import TradeContainer from "../containers/TradeContainer";
 import TransactionsContainer from "../containers/TransactionsContainer";
 import PortfolioContainer from "../containers/PortfolioContainer";
+import StocksContainer from "../containers/StocksContainer";
 
-const Main = () => {
+const Main = () => (
   <Router>
-    <select>
-      <option>Trade</option>
-    </select>
+    <div>
+      <select>
+        <option>Trade</option>
+      </select>
 
-    <Switch>
-      <Route exact path="/trade/:id" component={TradeContainer} />
-      <Route exact path="/portfolio/" component={PortfolioContainer} />
-      <Route exact path="/transactions/" component={TransactionsContainer} />
-      <Route render={() => <h1>Page not found</h1>} />
-    </Switch>
-  </Router>;
-};
+      <Switch>
+        <Route exact path="/" component={StocksContainer} />
+        <Route exact path="/trade/:symbol" component={TradeContainer} />
+        <Route exact path="/portfolio/" component={PortfolioContainer} />
+        <Route exact path="/transactions/" component={TransactionsContainer} />
+        <Route render={() => <h1>Page not found</h1>} />
+      </Switch>
+    </div>
+  </Router>
+);
+
+export default Main;

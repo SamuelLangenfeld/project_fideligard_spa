@@ -10,7 +10,7 @@ class Stocks extends Component {
     let stocksList = this.props.stocks.map((stock, i) => {
       return (
         <tr key={i}>
-          <td>{stock.name}</td>
+          <td>{stock.symbol}</td>
           <td>{stock.price}</td>
           <td>{stock.d1Price}</td>
           <td>{stock.d7Price}</td>

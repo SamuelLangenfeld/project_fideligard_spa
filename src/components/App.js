@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import StocksContainer from "../containers/StocksContainer";
+import Main from "./Main";
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <StocksContainer />
+        <Main />
       </div>
     );
   }

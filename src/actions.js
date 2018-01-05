@@ -64,7 +64,7 @@ export function getStocks() {
         console.log("results =>", results);
         results = results.map((result, i) => {
           return {
-            name: symbols[i],
+            symbol: symbols[i],
             price: result.dataset_data.data[0][4],
             d1Price: result.dataset_data.data[1][4],
             d7Price: result.dataset_data.data[6][4],
