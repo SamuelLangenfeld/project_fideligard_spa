@@ -29,26 +29,33 @@ export function getStocks() {
   return dispatch => {
     console.log("making dispatch");
     let symbols = [
-      "aapl"
-      // "tsla",
-      // "amzn",
-      // "nlfx",
-      // "fb",
-      // "goog",
-      // "twtr",
-      // "t",
-      // "vz",
-      // "ge"
+      "aapl",
+      "tsla",
+      "amzn",
+      "fb",
+      "goog",
+      "twtr",
+      "t",
+      "vz",
+      "ge"
     ];
     dispatch(getStocksRequest());
 
     let promiseArray = [];
+    let time = 10;
 
     symbols.forEach(symbol => {
+      time += 300;
       promiseArray.push(
-        fetch(
-          `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?api_key=${apiKey}`
-        ).then(results => results.json())
+        new Promise((res, rej) => {
+          setTimeout(() => {
+            fetch(
+              `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?api_key=${apiKey}`
+            )
+              .then(results => results.json())
+              .then(results => res(results));
+          }, time);
+        })
       );
     });
 
