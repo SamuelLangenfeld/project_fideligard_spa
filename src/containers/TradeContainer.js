@@ -14,8 +14,10 @@ const mapStateToProps = (state, ownProps) => {
     ? this.state.quantity ? this.state.quantity : 100
     : 100;
 
-  console.log("STOCK");
-  console.log(stock);
+  console.log("state");
+  console.log(state);
+  console.log("ownProps");
+  console.log(ownProps);
   return {
     stock,
     quantity,

@@ -14,6 +14,18 @@ import StocksContainer from "../containers/StocksContainer";
 const Main = () => (
   <Router>
     <div>
+      <div className="NavLinks">
+        <NavLink activeClassName="active" exact to="/trade/aapl">
+          Trade
+        </NavLink>{" "}
+        <NavLink activeClassName="active" exact to="/portfolio/">
+          Portfolio
+        </NavLink>{" "}
+        <NavLink activeClassName="active" to="/transaction">
+          Transactions
+        </NavLink>
+      </div>
+
       <select>
         <option>Trade</option>
       </select>

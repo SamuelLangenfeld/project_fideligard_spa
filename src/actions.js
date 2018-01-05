@@ -29,15 +29,15 @@ export function getStocks() {
   return dispatch => {
     console.log("making dispatch");
     let symbols = [
-      "aapl",
-      "tsla",
-      "amzn",
-      "fb",
-      "goog",
-      "twtr",
-      "t",
-      "vz",
-      "ge"
+      "aapl"
+      // "tsla",
+      // "amzn",
+      // "fb"
+      // "goog",
+      // "twtr",
+      // "t",
+      // "vz",
+      // "ge"
     ];
     dispatch(getStocksRequest());
 
@@ -45,7 +45,7 @@ export function getStocks() {
     let time = 1;
 
     symbols.forEach(symbol => {
-      time += 150;
+      time += 300;
       promiseArray.push(
         new Promise((res, rej) => {
           setTimeout(() => {
