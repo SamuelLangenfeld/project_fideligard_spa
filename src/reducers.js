@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import * as Actions from "./actions";
 
-let initialState = { stocks: [{}] };
+let initialState = { stocks: [{}], stock: {} };
 
 export function fideligard(state = initialState, action) {
   switch (action.type) {
@@ -23,6 +23,19 @@ export function fideligard(state = initialState, action) {
         ...state,
         isFetching: false,
         error: action.error
+      };
+
+    case Actions.SET_STOCK:
+      let stock = state.stocks.find(stock => stock.symbol === action.data);
+      return {
+        ...state,
+        stock
+      };
+
+    case Actions.UPDATE_QUANTITY:
+      return {
+        ...state,
+        stock: { ...state.stock, quantity: action.data }
       };
 
     default:

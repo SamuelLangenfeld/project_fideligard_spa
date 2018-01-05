@@ -4,6 +4,8 @@ import fetch from "isomorphic-fetch";
 export const GET_STOCKS_REQUEST = "GET_STOCKS_REQUEST";
 export const GET_STOCKS_SUCCESS = "GET_STOCKS_SUCCESS";
 export const GET_STOCKS_FAILURE = "GET_STOCKS_FAILURE";
+export const SET_STOCK = "SET_STOCK";
+export const UPDATE_QUANTITY = "UPDATE_QUANTITY";
 
 export function getStocksRequest() {
   return {
@@ -22,6 +24,20 @@ export function getStocksFailure(error) {
   return {
     type: GET_STOCKS_FAILURE,
     error: error
+  };
+}
+
+export function setStock(data) {
+  return {
+    type: SET_STOCK,
+    data
+  };
+}
+
+export function updateQuantity(data) {
+  return {
+    type: UPDATE_QUANTITY,
+    data
   };
 }
 

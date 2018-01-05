@@ -1,26 +1,12 @@
 import { connect } from "react-redux";
 import Trade from "../components/Trade";
+import { setStock, updateQuantity } from "../actions";
 
 const mapStateToProps = (state, ownProps) => {
-  let stock;
-  if (state.fideligard.stocks) {
-    stock = state.fideligard.stocks.find(stock => {
-      return stock.symbol == ownProps.match.params.symbol;
-    });
-  } else {
-    stock = null;
-  }
-  let quantity = this.state
-    ? this.state.quantity ? this.state.quantity : 100
-    : 100;
-
-  console.log("state");
   console.log(state);
-  console.log("ownProps");
-  console.log(ownProps);
+
   return {
-    stock,
-    quantity,
+    stock: state.fideligard.stock,
     symbol: ownProps.match.params.symbol
   };
 };
@@ -28,9 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     updateQuantity: e => {
-      this.setState({
-        quantity: e.target.value
-      });
+      dispatch(updateQuantity(e.target.value));
     }
   };
 };

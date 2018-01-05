@@ -22,7 +22,11 @@ class Stocks extends Component {
           <td>{stock.d1Price}</td>
           <td>{stock.d7Price}</td>
           <td>{stock.d30Price}</td>
-          <button onClick={this.props.redirect}>Trade</button>
+          <td>
+            <a href="/" onClick={this.props.setStock} symbol={stock.symbol}>
+              Trade
+            </a>
+          </td>
         </tr>
       );
     });
