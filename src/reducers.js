@@ -1,6 +1,10 @@
 import { combineReducers } from "redux";
 
-export function fideligard(state, action) {}
+let initialState = { stocks: [{}] };
+
+export function fideligard(state = initialState, action) {
+  return state;
+}
 
 export const fideligardApp = combineReducers({
   fideligard

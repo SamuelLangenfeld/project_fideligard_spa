@@ -1,16 +1,16 @@
 import { connect } from "react-redux";
-import App from "../components/App";
+import Stocks from "../components/Stocks";
 //import serialize from "form-serialize";
 //import { getGoodreads, getGoodreadsBook, clearBook } from "../actions";
 
 const mapStateToProps = state => {
-  return {};
+  return { stocks: state.fideligard.stocks };
 };
 
 const mapDispatchToProps = dispatch => {
   return {};
 };
 
-const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
+const StocksContainer = connect(mapStateToProps, mapDispatchToProps)(Stocks);
 
-export default AppContainer;
+export default StocksContainer;
