@@ -1,4 +1,5 @@
 import apiKey from "./config";
+import fetch from "isomorphic-fetch";
 
 export const GET_STOCKS_REQUEST = "GET_STOCKS_REQUEST";
 export const GET_STOCKS_SUCCESS = "GET_STOCKS_SUCCESS";
@@ -24,19 +25,20 @@ export function getStocksFailure(error) {
   };
 }
 
-export function getStocks(query) {
+export function getStocks() {
   return dispatch => {
+    console.log("making dispatch");
     let symbols = [
-      "appl",
-      "tsla",
-      "amzn",
-      "nlfx",
-      "fb",
-      "goog",
-      "twtr",
-      "t",
-      "vz",
-      "ge"
+      "aapl"
+      // "tsla",
+      // "amzn",
+      // "nlfx",
+      // "fb",
+      // "goog",
+      // "twtr",
+      // "t",
+      // "vz",
+      // "ge"
     ];
     dispatch(getStocksRequest());
 
@@ -52,6 +54,17 @@ export function getStocks(query) {
 
     Promise.all(promiseArray)
       .then(results => {
+        console.log("results =>", results);
+        results = results.map((result, i) => {
+          return {
+            name: symbols[i],
+            price: result.dataset_data.data[0][4],
+            d1Price: result.dataset_data.data[1][4],
+            d7Price: result.dataset_data.data[6][4],
+            d30Price: result.dataset_data.data[29][4]
+          };
+        });
+        console.log("results => ", results);
         dispatch(getStocksSuccess(results));
       })
       .catch(e => {

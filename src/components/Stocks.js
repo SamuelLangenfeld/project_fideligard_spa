@@ -1,37 +1,44 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-const Stocks = ({ stocks }) => {
-  let stocksList = stocks.map(stock => {
-    return (
-      <tr>
-        {" "}
-        <td>{stock.symbol}</td>
-        <td>{stock.price}</td>
-        <td>{stock.d1Price}</td>
-        <td>{stock.d7Price}</td>
-        <td>{stock.d30Price}</td>
-        <td>
-          <a href="/trade">Trade?</a>
-        </td>
-      </tr>
-    );
-  });
+class Stocks extends Component {
+  componentDidMount() {
+    this.props.getStocks();
+  }
 
-  return (
-    <table>
-      <thead>
-        <th>Symbol</th>
-        <th>Price</th>
-        <th>1d</th>
-        <th>7d</th>
-        <th>30d</th>
-        <th>Trade?</th>
-      </thead>
-      {stocksList}
-    </table>
-  );
-};
+  render() {
+    let stocksList = this.props.stocks.map((stock, i) => {
+      return (
+        <tr key={i}>
+          <td>{stock.name}</td>
+          <td>{stock.price}</td>
+          <td>{stock.d1Price}</td>
+          <td>{stock.d7Price}</td>
+          <td>{stock.d30Price}</td>
+          <td>
+            <a href="/trade">Trade?</a>
+          </td>
+        </tr>
+      );
+    });
+
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>1d</th>
+            <th>7d</th>
+            <th>30d</th>
+            <th>Trade?</th>
+          </tr>
+        </thead>
+        <tbody>{stocksList}</tbody>
+      </table>
+    );
+  }
+}
 
 Stocks.propTypes = {
   stocks: PropTypes.array
