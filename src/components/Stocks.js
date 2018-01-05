@@ -22,11 +22,7 @@ class Stocks extends Component {
           <td>{stock.d1Price}</td>
           <td>{stock.d7Price}</td>
           <td>{stock.d30Price}</td>
-          <td>
-            <NavLink activeClassName="active" exact to="/trade/aapl">
-              Trade
-            </NavLink>
-          </td>
+          <button onClick={this.props.redirect}>Trade</button>
         </tr>
       );
     });
