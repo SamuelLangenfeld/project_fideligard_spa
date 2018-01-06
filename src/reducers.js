@@ -33,9 +33,15 @@ export function fideligard(state = initialState, action) {
       };
 
     case Actions.UPDATE_QUANTITY:
+      let quantity = Number(action.data);
+      console.log(state.stock.price * quantity);
       return {
         ...state,
-        stock: { ...state.stock, quantity: action.data }
+        stock: {
+          ...state.stock,
+          quantity: quantity,
+          cost: Number(state.stock.price * quantity)
+        }
       };
 
     default:

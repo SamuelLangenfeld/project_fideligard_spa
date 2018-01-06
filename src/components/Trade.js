@@ -7,8 +7,8 @@ class Trade extends Component {
       <div>
         <p>Trade</p>
         <form>
-          <label>Symbol</label>
-          <input type="text" name="symbol" value={this.props.symbol} />
+          <label>Symbol3</label>
+          <input type="text" name="symbol" value={this.props.stock.symbol} />
           <label>Buy/Sell</label>
           <select>
             <option value="buy">Buy</option>

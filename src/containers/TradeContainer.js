@@ -6,8 +6,7 @@ const mapStateToProps = (state, ownProps) => {
   console.log(state);
 
   return {
-    stock: state.fideligard.stock,
-    symbol: ownProps.match.params.symbol
+    stock: state.fideligard.stock
   };
 };
 
