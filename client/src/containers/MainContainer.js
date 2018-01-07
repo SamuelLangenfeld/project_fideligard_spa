@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import Main from "../components/Main";
 //import serialize from "form-serialize";
@@ -6,13 +5,31 @@ import { withRouter } from "react-router-dom";
 
 const mapStateToProps = (state, ownProps) => {
   let redirect =
-    ownProps.location.pathname != "/" &&
+    ownProps.location.pathname !== "/" &&
     (!state.fideligardStocks.stocks ||
       state.fideligardStocks.stocks.length <= 0);
   let symbol = state.fideligardStocks.stock
     ? state.fideligardStocks.stock.symbol
     : "aapl";
-  return { stocks: state.fideligardStocks.stocks, redirect, symbol };
+
+  let path;
+  switch (true) {
+    case /trade/.test(ownProps.location.pathname):
+      path = "Trade";
+      break;
+    case /transactions/.test(ownProps.location.pathname):
+      path = "Transactions";
+      break;
+    default:
+      path = "Portfolio";
+  }
+
+  return {
+    stocks: state.fideligardStocks.stocks,
+    redirect,
+    symbol,
+    path
+  };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {

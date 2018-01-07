@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import Stocks from "../components/Stocks";
 //import serialize from "form-serialize";

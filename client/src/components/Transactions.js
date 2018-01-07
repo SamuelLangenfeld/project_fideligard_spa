@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
 class Transactions extends Component {
   render() {
     return (
       <div>
-        <p>Trade</p>
+        <p>Transactions</p>
         <select>
           <option value="buy">Buy</option>
           <option value="sell">Sell</option>

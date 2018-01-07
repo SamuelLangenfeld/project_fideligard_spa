@@ -27,5 +27,22 @@
   }
 }
 
-.form-control {
+table {
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+.route-select {
+  float: right;
+}
+
+.route-display {
+}
+
+.valid {
+  color: green;
+}
+
+.invalid {
+  color: red;
 }

@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import * as Actions from "./actions";
 
-let initialStockState = { stocks: [], stock: {} };
+let initialStockState = { stocks: [], transactionType: "BUY" };
 let initialUserState = { transactions: [], balance: 100000, portfolio: [] };
 
 export function fideligardStocks(state = initialStockState, action) {
@@ -30,7 +30,7 @@ export function fideligardStocks(state = initialStockState, action) {
       let stock = state.stocks.find(stock => {
         return stock.symbol === action.data;
       });
-      stock = { ...stock, quantity: 100, cost: stock.price * 100 };
+      stock = { ...stock, quantity: 100, cost: (stock.price * 100).toFixed(2) };
       return {
         ...state,
         stock
@@ -47,6 +47,12 @@ export function fideligardStocks(state = initialStockState, action) {
         }
       };
 
+    case Actions.SET_TRANSACTION_TYPE:
+      return {
+        ...state,
+        transactionType: action.data
+      };
+
     default:
       return state;
   }
@@ -54,6 +60,31 @@ export function fideligardStocks(state = initialStockState, action) {
 
 export function fideligardUser(state = initialUserState, action) {
   switch (action.type) {
+    case Actions.MAKE_TRANSACTION:
+      //portfolio: {"aapl": 50, "vz":10}
+      let portfolio = { ...state.portfolio };
+      let transactions = state.transactions.slice(0);
+      transactions.push({
+        ...action.data
+      });
+      let quantity = action.data.quantity;
+      if (action.data.type === "SELL") {
+        quantity = -1 * quantity;
+      }
+      if (portfolio[action.data.symbol]) {
+        portfolio[action.data.symbol] += quantity;
+      } else {
+        portfolio[action.data.symbol] = quantity;
+      }
+
+      let balance = state.balance - action.data.price * quantity;
+
+      return {
+        ...state,
+        portfolio,
+        transactions,
+        balance
+      };
     default:
       return state;
   }
