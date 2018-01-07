@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 import * as Actions from "./actions";
 
-let initialState = { stocks: [{}], stock: {} };
+let initialStockState = { stocks: [], stock: {} };
+let initialUserState = { transactions: [], balance: 100000, portfolio: [] };
 
-export function fideligard(state = initialState, action) {
+export function fideligardStocks(state = initialStockState, action) {
   switch (action.type) {
     case Actions.GET_STOCKS_REQUEST:
       return {
@@ -26,7 +27,10 @@ export function fideligard(state = initialState, action) {
       };
 
     case Actions.SET_STOCK:
-      let stock = state.stocks.find(stock => stock.symbol === action.data);
+      let stock = state.stocks.find(stock => {
+        return stock.symbol === action.data;
+      });
+      stock = { ...stock, quantity: 100, cost: stock.price * 100 };
       return {
         ...state,
         stock
@@ -34,13 +38,12 @@ export function fideligard(state = initialState, action) {
 
     case Actions.UPDATE_QUANTITY:
       let quantity = Number(action.data);
-      console.log(state.stock.price * quantity);
       return {
         ...state,
         stock: {
           ...state.stock,
           quantity: quantity,
-          cost: Number(state.stock.price * quantity)
+          cost: (Number(state.stock.price) * quantity).toFixed(2)
         }
       };
 
@@ -49,6 +52,14 @@ export function fideligard(state = initialState, action) {
   }
 }
 
+export function fideligardUser(state = initialUserState, action) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
+
 export const fideligardApp = combineReducers({
-  fideligard
+  fideligardStocks,
+  fideligardUser
 });

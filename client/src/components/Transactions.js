@@ -23,7 +23,7 @@ class Transactions extends Component {
           </thead>
           <tbody>
             <tr>
-              <th>this.props.</th>
+              <th>Cost Basis</th>
               <th>Current Value</th>
               <th>Profit/Loss</th>
               <th>1d</th>

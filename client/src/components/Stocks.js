@@ -5,7 +5,8 @@ import {
   Route,
   Link,
   NavLink,
-  Switch
+  Switch,
+  withRouter
 } from "react-router-dom";
 
 class Stocks extends Component {
@@ -23,17 +24,15 @@ class Stocks extends Component {
           <td>{stock.d7Price}</td>
           <td>{stock.d30Price}</td>
           <td>
-            <a href="/" onClick={this.props.setStock} symbol={stock.symbol}>
-              Trade
-            </a>
+            <Link to={`/trade/${stock.symbol}`}>Trade</Link>
           </td>
         </tr>
       );
     });
 
     return (
-      <Router>
-        <table>
+      <div>
+        <table className="table table-bordered table-striped">
           <thead>
             <tr>
               <th>Symbol</th>
@@ -46,7 +45,7 @@ class Stocks extends Component {
           </thead>
           <tbody>{stocksList}</tbody>
         </table>
-      </Router>
+      </div>
     );
   }
 }

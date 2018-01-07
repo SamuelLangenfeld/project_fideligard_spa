@@ -4,7 +4,10 @@ import Stocks from "../components/Stocks";
 import { getStocks } from "../actions";
 import Transactions from "../components/Transactions";
 
-const mapStateToProps = state => {};
+const mapStateToProps = state => {
+  {
+  }
+};
 
 const mapDispatchToProps = dispatch => {
   return {};

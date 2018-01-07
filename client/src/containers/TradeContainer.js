@@ -3,10 +3,9 @@ import Trade from "../components/Trade";
 import { setStock, updateQuantity } from "../actions";
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
-
   return {
-    stock: state.fideligard.stock
+    stock: state.fideligardStocks.stock,
+    symbol: ownProps.match.params.symbol
   };
 };
 
@@ -14,6 +13,10 @@ const mapDispatchToProps = dispatch => {
   return {
     updateQuantity: e => {
       dispatch(updateQuantity(e.target.value));
+    },
+    setStock: symbol => dispatch(setStock(symbol)),
+    readOnly: e => {
+      return undefined;
     }
   };
 };

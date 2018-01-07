@@ -6,8 +6,8 @@ import { getStocks } from "../actions";
 import { withRouter } from "react-router-dom";
 import { setStock } from "../actions";
 
-const mapStateToProps = state => {
-  return { stocks: state.fideligard.stocks };
+const mapStateToProps = (state, ownProps) => {
+  return { ...ownProps, stocks: state.fideligardStocks.stocks };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -24,6 +24,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-const StocksContainer = connect(mapStateToProps, mapDispatchToProps)(Stocks);
+const StocksContainer = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Stocks)
+);
 
-export default withRouter(StocksContainer);
+export default StocksContainer;

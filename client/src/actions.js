@@ -43,17 +43,16 @@ export function updateQuantity(data) {
 
 export function getStocks() {
   return dispatch => {
-    console.log("making dispatch");
     let symbols = [
-      "aapl"
-      // "tsla",
-      // "amzn",
-      // "fb"
-      // "goog",
-      // "twtr",
-      // "t",
-      // "vz",
-      // "ge"
+      "aapl",
+      "tsla",
+      "amzn",
+      "fb",
+      "goog",
+      "twtr",
+      "t",
+      "vz",
+      "ge"
     ];
     dispatch(getStocksRequest());
 
@@ -61,12 +60,12 @@ export function getStocks() {
     let time = 1;
 
     symbols.forEach(symbol => {
-      time += 300;
+      time += 1000;
       promiseArray.push(
         new Promise((res, rej) => {
           setTimeout(() => {
             fetch(
-              `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?trim_start=2017-11-01&api_key=${apiKey}`
+              `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?api_key=${apiKey}`
             )
               .then(results => results.json())
               .then(results => res(results));
@@ -77,7 +76,6 @@ export function getStocks() {
 
     Promise.all(promiseArray)
       .then(results => {
-        console.log("results =>", results);
         results = results.map((result, i) => {
           return {
             symbol: symbols[i],
@@ -87,7 +85,6 @@ export function getStocks() {
             d30Price: result.dataset_data.data[29][4]
           };
         });
-        console.log("results => ", results);
         dispatch(getStocksSuccess(results));
       })
       .catch(e => {

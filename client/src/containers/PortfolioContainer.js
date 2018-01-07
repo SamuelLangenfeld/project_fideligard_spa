@@ -4,7 +4,9 @@ import Stocks from "../components/Stocks";
 import { getStocks } from "../actions";
 import Portfolio from "../components/Portfolio";
 
-const mapStateToProps = state => {};
+const mapStateToProps = state => {
+  return {};
+};
 
 const mapDispatchToProps = dispatch => {
   return {};
