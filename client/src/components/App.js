@@ -12,7 +12,7 @@ const App = props => {
         <Navbar />
         <div className="container-width">
           <div className="NavLinks">
-            <NavLink activeClassName="active" exact to="/trade/appl">
+            <NavLink activeClassName="active" exact to="/trade/aapl">
               Trade
             </NavLink>{" "}
             <NavLink activeClassName="active" exact to="/portfolio">

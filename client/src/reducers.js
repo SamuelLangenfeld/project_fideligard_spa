@@ -91,7 +91,10 @@ export function fideligardStocks(state = initialStockState, action) {
       }
 
       let startDate = moment(action.data, "YYYY-MM-DD").format("YYYY-MM-DD");
-      let d1 = moment(action.data, "YYYY-MM-DD").format("YYYY-MM-DD");
+      let d1 = moment(action.data, "YYYY-MM-DD")
+        .subtract(1, "days")
+        .format("YYYY-MM-DD");
+
       let d7 = moment(action.data, "YYYY-MM-DD")
         .subtract(7, "days")
         .format("YYYY-MM-DD");
@@ -101,18 +104,25 @@ export function fideligardStocks(state = initialStockState, action) {
 
       stocks = state.historicalStocks.map(stock => {
         let symbol = stock.symbol;
-        let price = stock.data.find(el => {
+        let sameDayData = stock.data.find(el => {
           return el.date == startDate;
-        }).price;
-        let d1Price = stock.data.find(el => {
+        });
+        let price = sameDayData ? sameDayData.price : "x";
+
+        let d1Data = stock.data.find(el => {
           return el.date === d1;
-        }).price;
-        let d7Price = stock.data.find(el => {
+        });
+        let d1Price = d1Data ? d1Data.price : "x";
+
+        let d7Data = stock.data.find(el => {
           return el.date === d7;
-        }).price;
-        let d30Price = stock.data.find(el => {
+        });
+        let d7Price = d7Data ? d7Data.price : "x";
+
+        let d30Data = stock.data.find(el => {
           return el.date === d30;
-        }).price;
+        });
+        let d30Price = d30Data ? d30Data.price : "x";
 
         return { symbol, price, d1Price, d7Price, d30Price };
       });

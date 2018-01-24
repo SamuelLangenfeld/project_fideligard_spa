@@ -83,7 +83,7 @@ class Trade extends Component {
             <div className="form-group row">
               <label className="col-md-4 col-form-label">Cost</label>
               <div className="form-control col-md-8" readOnly={true}>
-                ${stock.cost}
+                ${stock.cost ? stock.cost.toFixed(2) : ""}
               </div>
               <input type="hidden" name="cost" value={stock.cost} />
             </div>
