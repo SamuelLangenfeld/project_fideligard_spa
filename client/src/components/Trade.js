@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 class Trade extends Component {
   componentWillReceiveProps(nextProps) {
-    if (nextProps.symbol !== this.props.symbol) {
+    if (nextProps.symbol && nextProps.symbol !== this.props.symbol) {
       this.props.setStock(nextProps.symbol);
     }
   }

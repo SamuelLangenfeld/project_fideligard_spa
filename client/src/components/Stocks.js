@@ -8,14 +8,15 @@ class Stocks extends Component {
   }
 
   render() {
-    let stocksList = this.props.stocks.map((stock, i) => {
+    console.log(this.props.stocks);
+    let stocksList = this.props.stocks.map(stock => {
       return (
-        <tr key={i}>
+        <tr key={stock.symbol}>
           <td>{stock.symbol}</td>
-          <td>{stock.price}</td>
-          <td>{stock.d1Price}</td>
-          <td>{stock.d7Price}</td>
-          <td>{stock.d30Price}</td>
+          <td>${stock.price}</td>
+          <td>${stock.d1Price}</td>
+          <td>${stock.d7Price}</td>
+          <td>${stock.d30Price}</td>
           <td>
             <Link to={`/trade/${stock.symbol}`}>Trade</Link>
           </td>

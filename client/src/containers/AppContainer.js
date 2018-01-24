@@ -4,7 +4,7 @@ import App from "../components/App";
 //import { getGoodreads, getGoodreadsBook, clearBook } from "../actions";
 
 const mapStateToProps = state => {
-  return {};
+  return { balance: state.fideligardUser.balance };
 };
 
 const mapDispatchToProps = dispatch => {

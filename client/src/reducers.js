@@ -1,8 +1,19 @@
 import { combineReducers } from "redux";
 import * as Actions from "./actions";
+const moment = require("moment");
 
-let initialStockState = { stocks: [], transactionType: "BUY" };
-let initialUserState = { transactions: [], balance: 100000, portfolio: [] };
+let initialStockState = {
+  stocks: [],
+  transactionType: "BUY",
+  symbol: "aapl",
+  date: "2018-01-05"
+};
+let initialUserState = {
+  transactions: [],
+  balance: 100000,
+  portfolio: [],
+  moneySpent: 0
+};
 
 export function fideligardStocks(state = initialStockState, action) {
   switch (action.type) {
@@ -12,11 +23,29 @@ export function fideligardStocks(state = initialStockState, action) {
         isFetching: true,
         error: null
       };
+
     case Actions.GET_STOCKS_SUCCESS:
+      let fullData = action.data.map(result => {
+        let data = result.dataset_data.data;
+        data = data.map(data => {
+          return { date: data[0], price: Number(data[4]) };
+        });
+        return { symbol: result.symbol, data };
+      });
+      let stocks = action.data.map(result => {
+        return {
+          symbol: result.symbol,
+          price: Number(result.dataset_data.data[0][4]),
+          d1Price: Number(result.dataset_data.data[1][4]),
+          d7Price: Number(result.dataset_data.data[6][4]),
+          d30Price: Number(result.dataset_data.data[29][4])
+        };
+      });
       return {
         ...state,
         isFetching: false,
-        stocks: action.data
+        historicalStocks: fullData,
+        stocks
       };
 
     case Actions.GET_STOCKS_FAILURE:
@@ -28,9 +57,11 @@ export function fideligardStocks(state = initialStockState, action) {
 
     case Actions.SET_STOCK:
       let stock = state.stocks.find(stock => {
+        if (stock.symbol === action.data) {
+        }
         return stock.symbol === action.data;
       });
-      stock = { ...stock, quantity: 100, cost: (stock.price * 100).toFixed(2) };
+      stock = { ...stock, quantity: 100, cost: stock.price * 100 };
       return {
         ...state,
         stock
@@ -43,7 +74,7 @@ export function fideligardStocks(state = initialStockState, action) {
         stock: {
           ...state.stock,
           quantity: quantity,
-          cost: (Number(state.stock.price) * quantity).toFixed(2)
+          cost: state.stock.price * quantity
         }
       };
 
@@ -51,6 +82,45 @@ export function fideligardStocks(state = initialStockState, action) {
       return {
         ...state,
         transactionType: action.data
+      };
+
+    case Actions.SET_DATE:
+      let maxDate = new Date("2018-1-5");
+      if (new Date(action.data) > maxDate) {
+        action.data = "2018-01-05";
+      }
+
+      let startDate = moment(action.data, "YYYY-MM-DD").format("YYYY-MM-DD");
+      let d1 = moment(action.data, "YYYY-MM-DD").format("YYYY-MM-DD");
+      let d7 = moment(action.data, "YYYY-MM-DD")
+        .subtract(7, "days")
+        .format("YYYY-MM-DD");
+      let d30 = moment(action.data, "YYYY-MM-DD")
+        .subtract(30, "days")
+        .format("YYYY-MM-DD");
+
+      stocks = state.historicalStocks.map(stock => {
+        let symbol = stock.symbol;
+        let price = stock.data.find(el => {
+          return el.date == startDate;
+        }).price;
+        let d1Price = stock.data.find(el => {
+          return el.date === d1;
+        }).price;
+        let d7Price = stock.data.find(el => {
+          return el.date === d7;
+        }).price;
+        let d30Price = stock.data.find(el => {
+          return el.date === d30;
+        }).price;
+
+        return { symbol, price, d1Price, d7Price, d30Price };
+      });
+
+      return {
+        ...state,
+        date: action.data,
+        stocks
       };
 
     default:
@@ -67,7 +137,7 @@ export function fideligardUser(state = initialUserState, action) {
       transactions.push({
         ...action.data
       });
-      let quantity = action.data.quantity;
+      let quantity = Number(action.data.quantity);
       if (action.data.type === "SELL") {
         quantity = -1 * quantity;
       }
@@ -78,12 +148,14 @@ export function fideligardUser(state = initialUserState, action) {
       }
 
       let balance = state.balance - action.data.price * quantity;
+      let moneySpent = state.moneySpent + action.data.price * quantity;
 
       return {
         ...state,
         portfolio,
         transactions,
-        balance
+        balance,
+        moneySpent
       };
     default:
       return state;

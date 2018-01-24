@@ -1,40 +1,48 @@
-import React, { Component } from "react";
+import React from "react";
 //import PropTypes from "prop-types";
 
-class Transactions extends Component {
-  render() {
-    return (
+const Transactions = props => {
+  let transactionsTable;
+  if (props.transactions && props.transactions.length > 0) {
+    transactionsTable = (
+      <table className="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Symbol</th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.transactions.map((transaction, i) => {
+            return (
+              <tr key={i}>
+                <td>{transaction.date}</td>
+                <td>{transaction.symbol}</td>
+                <td>{transaction.type}</td>
+                <td>{transaction.quantity}</td>
+                <td>${transaction.price.toFixed(2)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    );
+  } else {
+    transactionsTable = (
       <div>
-        <p>Transactions</p>
-        <select>
-          <option value="buy">Buy</option>
-          <option value="sell">Sell</option>
-        </select>
-        <table>
-          <thead>
-            <tr>
-              <th>Cost Basis</th>
-              <th>Current Value</th>
-              <th>Profit/Loss</th>
-              <th>1d</th>
-              <th>7d</th>
-              <th>30d</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Cost Basis</th>
-              <th>Current Value</th>
-              <th>Profit/Loss</th>
-              <th>1d</th>
-              <th>7d</th>
-              <th>30d</th>
-            </tr>
-          </tbody>
-        </table>
+        <br />
+        <br />
+        <h4>
+          You haven't made any transactions at all. Ever. Get it together.
+        </h4>
       </div>
     );
   }
-}
+
+  return <div>{transactionsTable}</div>;
+};
 
 export default Transactions;

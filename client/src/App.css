@@ -37,6 +37,9 @@ table {
 }
 
 .route-display {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .valid {
@@ -45,4 +48,13 @@ table {
 
 .invalid {
   color: red;
+}
+
+.container-width {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.table {
+  font-size: 14px;
 }

@@ -9,13 +9,23 @@ import {
 
 const mapStateToProps = (state, ownProps) => {
   let portfolio = state.fideligardUser.portfolio;
+  let stock = state.fideligardStocks.stock;
 
   let orderStatus = true;
-  if (state.fideligardStocks.stock) {
-    orderStatus =
-      state.fideligardUser.balance > state.fideligardStocks.stock.cost;
-  }
 
+  if (stock) {
+    switch (state.fideligardStocks.transactionType) {
+      case "BUY":
+        orderStatus = state.fideligardUser.balance > stock.cost;
+        break;
+      case "SELL":
+        console.log("portfolio[stock.symbol]=>", portfolio[stock.symbol]);
+        orderStatus = portfolio[stock.symbol] >= stock.quantity;
+        break;
+      default:
+        orderStatus = true;
+    }
+  }
   return {
     stock: state.fideligardStocks.stock,
     symbol: ownProps.match.params.symbol,
@@ -26,7 +36,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     updateQuantity: e => {
       dispatch(updateQuantity(e.target.value));
@@ -50,16 +60,17 @@ const mapDispatchToProps = dispatch => {
     confirmTrade: e => {
       e.preventDefault();
       let form = e.target.parentNode.parentNode;
-      console.log(form);
       dispatch(
         makeTransaction({
           date: form.date.value,
           symbol: form.symbol.value,
-          price: form.price.value,
-          quantity: form.quantity.value,
+          price: Number(form.price.value),
+          quantity: Number(form.quantity.value),
           type: form.type.value
         })
       );
+
+      ownProps.history.push("/transactions");
     },
 
     invalidTrade: e => {

@@ -100,12 +100,12 @@ app.get("/apiCall", (req, res, next) => {
   let time = 1;
 
   symbols.forEach(symbol => {
-    time += 500;
+    time += 300;
     promiseArray.push(
       new Promise((res, rej) => {
         setTimeout(() => {
           fetch(
-            `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?api_key=${
+            `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?trim_start=2017-01-01&trim_end=2018-01-01&api_key=${
               process.env.api_key
             }`
           )
@@ -121,13 +121,8 @@ app.get("/apiCall", (req, res, next) => {
       result.symbol = symbols[i];
     });
     console.log("RECEIVED RESULTS");
-    fs.writeFile("stockinfo.txt", JSON.stringify(results, null, 2), err => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("WE DID IT BOYS");
-      }
-    });
+    res.append("Access-Control-Allow-Origin", "*");
+    res.json(results);
   });
 });
 

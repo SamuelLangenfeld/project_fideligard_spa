@@ -6,7 +6,14 @@ import { withRouter } from "react-router-dom";
 import { setStock } from "../actions";
 
 const mapStateToProps = (state, ownProps) => {
-  return { ...ownProps, stocks: state.fideligardStocks.stocks };
+  let stocks = state.fideligardStocks.stocks.map(stock => {
+    stock = { ...stock };
+    stock.d1Price = (stock.price - stock.d1Price).toFixed(2);
+    stock.d7Price = (stock.price - stock.d7Price).toFixed(2);
+    stock.d30Price = (stock.price - stock.d30Price).toFixed(2);
+    return stock;
+  });
+  return { ...ownProps, stocks };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
