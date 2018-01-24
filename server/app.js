@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-require("dotenv").config();
 const fs = require("fs");
 const fetch = require("isomorphic-fetch");
 
@@ -69,7 +68,12 @@ app.use((req, res, next) => {
 // ----------------------------------------
 // Public
 // ----------------------------------------
-app.use(express.static(`${__dirname}/public`));
+
+if (process.env.NODE_ENV !== "production") {
+  app.use(express.static(`client/build`));
+} else {
+  app.use(express.static(`${__dirname}/public`));
+}
 
 // ----------------------------------------
 // Logging
@@ -126,9 +130,14 @@ app.get("/apiCall", (req, res, next) => {
   });
 });
 
+app.get("/", (req, res, next) => {
+  res.render("index.html");
+});
+
 // ----------------------------------------
 // Template Engine
 // ----------------------------------------
+/*
 const expressHandlebars = require("express-handlebars");
 const helpers = require("./helpers");
 
@@ -138,9 +147,9 @@ const hbs = expressHandlebars.create({
   defaultLayout: "application"
 });
 
-app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
-
+//app.engine("handlebars", hbs.engine);
+//app.set("view engine", "handlebars");
+*/
 // ----------------------------------------
 // Server
 // ----------------------------------------
