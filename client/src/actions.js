@@ -63,13 +63,14 @@ export function setDate(data) {
   };
 }
 
-//The getStocks function is going to be async. I'll have to wire it back up to the server
-//in the future, or else use a better api. Hoo boy.
-
 export function getStocks() {
   return dispatch => {
     dispatch(getStocksRequest());
-    fetch("http://localhost:3001/apiCall")
+    let server =
+      process.env.NODE_ENV === "production"
+        ? "http://historic-stock-portfolio.herokuapp.com"
+        : "http://localhost:3001";
+    fetch(`${server}/apiCall`)
       .then(response => {
         return response.json();
       })
