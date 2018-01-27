@@ -124,6 +124,8 @@ export function fideligardStocks(state = initialStockState, action) {
         });
         let d30Price = d30Data ? d30Data.price : "x";
 
+        //update stock.price based on date
+
         return { symbol, price, d1Price, d7Price, d30Price };
       });
 
