@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const fetch = require("isomorphic-fetch");
+const path = require("path");
 
 // ----------------------------------------
 // App Variables
@@ -69,11 +70,7 @@ app.use((req, res, next) => {
 // Public
 // ----------------------------------------
 
-if (process.env.NODE_ENV !== "production") {
-  app.use(express.static(`client/build`));
-} else {
-  app.use(express.static(`${__dirname}/public`));
-}
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 // ----------------------------------------
 // Logging
@@ -131,7 +128,7 @@ app.get("/apiCall", (req, res, next) => {
 });
 
 app.get("/", (req, res, next) => {
-  res.render("index.html");
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 // ----------------------------------------

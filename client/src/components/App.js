@@ -18,7 +18,7 @@ const App = props => {
             <NavLink activeClassName="active" exact to="/portfolio">
               Portfolio
             </NavLink>{" "}
-            <NavLink activeClassName="active" to="/transaction">
+            <NavLink activeClassName="active" to="/transactions">
               Transactions
             </NavLink>{" "}
             <span>Remaining Cash: ${props.balance.toFixed(2)}</span>
