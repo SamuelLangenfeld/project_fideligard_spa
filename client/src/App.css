@@ -34,6 +34,8 @@ table {
 
 .route-select {
   float: right;
+  height: 30px;
+  margin-bottom: 10px;
 }
 
 .route-display {
@@ -57,4 +59,16 @@ table {
 
 .table {
   font-size: 14px;
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+}
+
+.slide-container {
+  border: 1px solid black;
+  padding: 5px;
+  padding-bottom: 0px;
+  margin-bottom: 10px;
 }

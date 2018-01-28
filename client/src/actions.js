@@ -7,6 +7,7 @@ export const UPDATE_QUANTITY = "UPDATE_QUANTITY";
 export const MAKE_TRANSACTION = "MAKE_TRANSACTION";
 export const SET_TRANSACTION_TYPE = "SET_TRANSACTION_TYPE";
 export const SET_DATE = "SET_DATE";
+export const SET_DATE_INDEX = "SET_DATE_INDEX";
 
 export function getStocksRequest() {
   return {
@@ -81,5 +82,12 @@ export function getStocks() {
         console.log(e);
         dispatch(getStocksFailure(e));
       });
+  };
+}
+
+export function setDateIndex(data) {
+  return {
+    type: SET_DATE_INDEX,
+    data
   };
 }

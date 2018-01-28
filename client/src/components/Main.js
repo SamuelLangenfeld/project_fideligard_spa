@@ -7,17 +7,24 @@ import PortfolioContainer from "../containers/PortfolioContainer";
 
 const Main = props => {
   if (props.isFetching) {
-    return <h2>Loading Historical Data</h2>;
+    return <h2>Loading Historical Data...</h2>;
   }
   return (
     <div>
-      <input
-        type="date"
-        min="1988-1-1"
-        max="2018-1-5"
-        onChange={props.dateChange}
-        value={props.date}
-      />
+      <div className="route-display">Date: {props.dates[props.dateIndex]}</div>
+      <div className="slide-container">
+        <input
+          type="range"
+          min="0"
+          max={props.dates.length - 1}
+          value={props.dateIndex}
+          onChange={props.setDateIndex}
+          className="slider"
+          id="myRange"
+          step={1}
+        />
+      </div>
+
       <div>
         <div className="route-display">{props.path}</div>
         <select

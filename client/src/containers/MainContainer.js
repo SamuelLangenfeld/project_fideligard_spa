@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import Main from "../components/Main";
 //import serialize from "form-serialize";
 import { withRouter } from "react-router-dom";
-import { setDate } from "../actions";
+import { setDate, setDateIndex } from "../actions";
 
 const mapStateToProps = (state, ownProps) => {
   let redirect =
@@ -25,6 +25,10 @@ const mapStateToProps = (state, ownProps) => {
       path = "Portfolio";
   }
 
+  let dates = state.fideligardStocks.dates ? state.fideligardStocks.dates : [];
+  let dateIndex = state.fideligardStocks.dateIndex
+    ? state.fideligardStocks.dateIndex
+    : 0;
   return {
     isFetching: state.fideligardStocks.isFetching,
     stocks: state.fideligardStocks.stocks,
@@ -32,7 +36,9 @@ const mapStateToProps = (state, ownProps) => {
     symbol,
     path,
     balance: state.fideligardUser.balance,
-    date: state.fideligardStocks.date
+    date: state.fideligardStocks.date,
+    dates,
+    dateIndex
   };
 };
 
@@ -55,6 +61,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
     dateChange: e => {
       dispatch(setDate(e.target.value));
+    },
+
+    setDateIndex: e => {
+      dispatch(setDateIndex(e.target.value));
     }
   };
 };

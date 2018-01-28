@@ -1,10 +1,12 @@
 import { connect } from "react-redux";
 import App from "../components/App";
+import formatMoney from "../helpers/formatMoney";
+
 //import serialize from "form-serialize";
 //import { getGoodreads, getGoodreadsBook, clearBook } from "../actions";
 
 const mapStateToProps = state => {
-  return { balance: state.fideligardUser.balance };
+  return { balance: formatMoney(state.fideligardUser.balance) };
 };
 
 const mapDispatchToProps = dispatch => {

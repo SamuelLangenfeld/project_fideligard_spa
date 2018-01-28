@@ -99,6 +99,13 @@ app.get("/apiCall", (req, res, next) => {
 
   let promiseArray = [];
   let time = 1;
+  let date = new Date();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  let day = date.getDate();
+
+  let endDate = `${year}-${month}-${day}`;
+  let startDate = `${year - 1}-${month}-${day}`;
 
   symbols.forEach(symbol => {
     time += 300;
@@ -106,7 +113,7 @@ app.get("/apiCall", (req, res, next) => {
       new Promise((res, rej) => {
         setTimeout(() => {
           fetch(
-            `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?trim_start=2017-01-01&trim_end=2018-01-01&api_key=${
+            `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?trim_start=${startDate}&trim_end=${endDate}&api_key=${
               process.env.api_key
             }`
           )
@@ -131,22 +138,6 @@ app.get("/", (req, res, next) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
-// ----------------------------------------
-// Template Engine
-// ----------------------------------------
-/*
-const expressHandlebars = require("express-handlebars");
-const helpers = require("./helpers");
-
-const hbs = expressHandlebars.create({
-  helpers: helpers,
-  partialsDir: "views/",
-  defaultLayout: "application"
-});
-
-//app.engine("handlebars", hbs.engine);
-//app.set("view engine", "handlebars");
-*/
 // ----------------------------------------
 // Server
 // ----------------------------------------

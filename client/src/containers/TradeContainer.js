@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import Trade from "../components/Trade";
+import formatMoney from "../helpers/formatMoney";
 import {
   setStock,
   updateQuantity,
@@ -19,20 +20,21 @@ const mapStateToProps = (state, ownProps) => {
         orderStatus = state.fideligardUser.balance > stock.cost;
         break;
       case "SELL":
-        console.log("portfolio[stock.symbol]=>", portfolio[stock.symbol]);
         orderStatus = portfolio[stock.symbol] >= stock.quantity;
         break;
       default:
         orderStatus = true;
     }
   }
+  let date = state.fideligardStocks.date || "";
   return {
     stock: state.fideligardStocks.stock,
     symbol: ownProps.match.params.symbol,
-    balance: state.fideligardUser.balance,
+    balance: formatMoney(state.fideligardUser.balance),
     orderStatus,
     portfolio,
-    transactionType: state.fideligardStocks.transactionType
+    transactionType: state.fideligardStocks.transactionType,
+    date
   };
 };
 
@@ -59,7 +61,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
     confirmTrade: e => {
       e.preventDefault();
-      let form = e.target.parentNode.parentNode;
+      let form = e.target;
       dispatch(
         makeTransaction({
           date: form.date.value,
@@ -70,7 +72,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         })
       );
 
-      ownProps.history.push("/transactions");
+      ownProps.history.push("/portfolio");
     },
 
     invalidTrade: e => {

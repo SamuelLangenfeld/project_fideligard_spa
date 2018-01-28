@@ -23,7 +23,7 @@ const Transactions = props => {
                 <td>{transaction.symbol}</td>
                 <td>{transaction.type}</td>
                 <td>{transaction.quantity}</td>
-                <td>${transaction.price.toFixed(2)}</td>
+                <td>{transaction.price}</td>
               </tr>
             );
           })}

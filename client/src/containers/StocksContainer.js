@@ -4,13 +4,15 @@ import Stocks from "../components/Stocks";
 import { getStocks } from "../actions";
 import { withRouter } from "react-router-dom";
 import { setStock } from "../actions";
+import formatMoney from "../helpers/formatMoney";
 
 const mapStateToProps = (state, ownProps) => {
   let stocks = state.fideligardStocks.stocks.map(stock => {
     stock = { ...stock };
-    stock.d1Price = (stock.price - stock.d1Price).toFixed(2);
-    stock.d7Price = (stock.price - stock.d7Price).toFixed(2);
-    stock.d30Price = (stock.price - stock.d30Price).toFixed(2);
+    stock.d1Price = formatMoney(stock.price - stock.d1Price);
+    stock.d7Price = formatMoney(stock.price - stock.d7Price);
+    stock.d30Price = formatMoney(stock.price - stock.d30Price);
+    stock.price = formatMoney(stock.price);
     return stock;
   });
   return { ...ownProps, stocks };

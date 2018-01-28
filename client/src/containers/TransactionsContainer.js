@@ -1,8 +1,12 @@
 import { connect } from "react-redux";
 import Transactions from "../components/Transactions";
+import formatMoney from "../helpers/formatMoney";
 
 const mapStateToProps = state => {
-  return { transactions: state.fideligardUser.transactions };
+  let transactions = state.fideligardUser.transactions.map(transaction => {
+    return { ...transaction, price: formatMoney(transaction.price) };
+  });
+  return { transactions };
 };
 
 const mapDispatchToProps = dispatch => {

@@ -15,10 +15,7 @@ class Trade extends Component {
 
   render() {
     let stock = this.props.stock || {};
-    let date = new Date();
-    let formattedDate = `${date.getMonth() +
-      1}-${date.getDate()}-${date.getFullYear()}`;
-
+    let date = this.props.date;
     let validity = this.props.orderStatus ? (
       <p className="valid">Valid</p>
     ) : (
@@ -32,13 +29,18 @@ class Trade extends Component {
     return (
       <div className="row">
         <div className="col-md-8">
-          <form id="#trade">
+          <form id="#trade" onSubmit={tradeFunc}>
             <div className="form-group row">
               <label className="col-md-4 col-form-label">Symbol</label>
               <div className="form-control col-md-8" readOnly={true}>
                 {stock.symbol}
               </div>
-              <input type="hidden" name="symbol" value={stock.symbol} />
+              <input
+                type="hidden"
+                name="symbol"
+                readOnly={true}
+                value={stock.symbol}
+              />
             </div>
             <div className="form-group row">
               <label className="col-md-4 col-form-label">Buy/Sell</label>
@@ -69,29 +71,27 @@ class Trade extends Component {
                 type="text"
                 name="date"
                 readOnly={true}
-                value={formattedDate}
+                value={date}
                 className="form-control col-md-8"
               />
             </div>
             <div className="form-group row">
               <label className="col-md-4 col-form-label">Price</label>
               <div className="form-control col-md-8" readOnly={true}>
-                ${stock.price}
+                {stock.price}
               </div>
               <input type="hidden" name="price" value={stock.price} />
             </div>
             <div className="form-group row">
               <label className="col-md-4 col-form-label">Cost</label>
               <div className="form-control col-md-8" readOnly={true}>
-                ${stock.cost ? stock.cost.toFixed(2) : ""}
+                {stock.cost ? stock.cost.toFixed(2) : ""}
               </div>
               <input type="hidden" name="cost" value={stock.cost} />
             </div>
             <div>
               <input
-                form="trade"
                 type="submit"
-                onClick={tradeFunc}
                 className="btn btn-primary"
                 value="Make a Trade!"
               />
@@ -100,7 +100,7 @@ class Trade extends Component {
         </div>
         <div className="col-md-4">
           <p> Cash Available </p>
-          <p> ${this.props.balance.toFixed(2)} </p>
+          <p> {this.props.balance} </p>
           <p> Order Status </p>
           {validity}
         </div>

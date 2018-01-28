@@ -1,7 +1,7 @@
 import React from "react";
 import StocksContainer from "../containers/StocksContainer";
 import MainContainer from "../containers/MainContainer";
-import { BrowserRouter as Router, NavLink } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./Navbar";
 import "../App.css";
 
@@ -11,18 +11,7 @@ const App = props => {
       <div className="App">
         <Navbar />
         <div className="container-width">
-          <div className="NavLinks">
-            <NavLink activeClassName="active" exact to="/trade/aapl">
-              Trade
-            </NavLink>{" "}
-            <NavLink activeClassName="active" exact to="/portfolio">
-              Portfolio
-            </NavLink>{" "}
-            <NavLink activeClassName="active" to="/transactions">
-              Transactions
-            </NavLink>{" "}
-            <span>Remaining Cash: ${props.balance.toFixed(2)}</span>
-          </div>
+          <div className="route-display">Remaining Cash: {props.balance}</div>
           <div className="row">
             <div className="col-md-5">
               <StocksContainer />

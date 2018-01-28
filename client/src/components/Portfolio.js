@@ -9,14 +9,14 @@ const Portfolio = props => {
         <td>{stock.symbol}</td>
         <td>{stock.quantity}</td>
         <td>{stock.costBasis}</td>
-        <td>{stock.value.toFixed(2)}</td>
-        <td>{stock.profit.toFixed(2)}</td>
-        <td>{stock.price.toFixed(2)}</td>
-        <td>{stock.d1Profit.toFixed(2)}</td>
-        <td>{stock.d7Profit.toFixed(2)}</td>
-        <td>{stock.d30Profit.toFixed(2)}</td>
+        <td>{stock.value}</td>
+        <td>{stock.profit}</td>
+        <td>{stock.price}</td>
+        <td>{stock.d1Profit}</td>
+        <td>{stock.d7Profit}</td>
+        <td>{stock.d30Profit}</td>
         <td>
-          <Link to={`/trade/${stock.symbol}`}>trade</Link>
+          <Link to={`/trade/${stock.symbol}`}>Trade</Link>
         </td>
       </tr>
     );
@@ -62,12 +62,12 @@ const Portfolio = props => {
         </thead>
         <tbody>
           <tr>
-            <td>${props.moneySpent}</td>
-            <td>${props.value}</td>
-            <td>${props.profit}</td>
-            <td>${props.totald1Profit}</td>
-            <td>${props.totald7Profit}</td>
-            <td>${props.totald30Profit}</td>
+            <td>{props.moneySpent}</td>
+            <td>{props.value}</td>
+            <td>{props.profit}</td>
+            <td>{props.totald1Profit}</td>
+            <td>{props.totald7Profit}</td>
+            <td>{props.totald30Profit}</td>
           </tr>
         </tbody>
       </table>
