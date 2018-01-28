@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-dark bg-dark">
       <Link to="/" className="navbar-brand mr-auto">
-        Historical Portfolio Simulator
+        Historic Portfolio Simulator
       </Link>
       <Link to="/trade/aapl" className="navbar-brand">
         Trade
