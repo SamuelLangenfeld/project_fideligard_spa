@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ symbol }) => {
   return (
     <nav className="navbar navbar-dark bg-dark">
       <Link to="/" className="navbar-brand mr-auto">
         Historic Portfolio Simulator
       </Link>
-      <Link to="/trade/aapl" className="navbar-brand">
+      <Link to={`/trade/${symbol}`} className="navbar-brand">
         Trade
       </Link>
       <Link to="/portfolio" className="navbar-brand">
