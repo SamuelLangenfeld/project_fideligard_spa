@@ -69,8 +69,8 @@ export function getStocks() {
     dispatch(getStocksRequest());
     let server =
       process.env.NODE_ENV === "production"
-        ? "http://historic-stock-portfolio.herokuapp.com"
-        : "http://localhost:3001";
+        ? "https://historic-stock-portfolio.herokuapp.com"
+        : "https://localhost:3001";
     fetch(`${server}/apiCall`)
       .then(response => {
         return response.json();
