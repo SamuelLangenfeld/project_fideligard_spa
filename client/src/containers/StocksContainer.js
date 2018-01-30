@@ -5,6 +5,7 @@ import { getStocks } from "../actions";
 import { withRouter } from "react-router-dom";
 import { setStock } from "../actions";
 import formatMoney from "../helpers/formatMoney";
+import PropTypes from "prop-types";
 
 const mapStateToProps = (state, ownProps) => {
   let stocks = state.fideligardStocks.stocks.map(stock => {
@@ -35,5 +36,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 const StocksContainer = withRouter(
   connect(mapStateToProps, mapDispatchToProps)(Stocks)
 );
+
+StocksContainer.propTypes = {
+  history: PropTypes.object
+};
 
 export default StocksContainer;

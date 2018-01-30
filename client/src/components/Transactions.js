@@ -1,5 +1,5 @@
 import React from "react";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const Transactions = props => {
   let transactionsTable;
@@ -45,4 +45,7 @@ const Transactions = props => {
   return <div>{transactionsTable}</div>;
 };
 
+Transactions.propTypes = {
+  transactions: PropTypes.array
+};
 export default Transactions;

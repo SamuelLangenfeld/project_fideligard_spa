@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import Main from "../components/Main";
-//import serialize from "form-serialize";
 import { withRouter } from "react-router-dom";
 import { setDate, setDateIndex } from "../actions";
+import PropTypes from "prop-types";
 
 const mapStateToProps = (state, ownProps) => {
   let redirect =
@@ -70,5 +70,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main);
+
+MainContainer.propTypes = {
+  location: PropTypes.object,
+  history: PropTypes.object
+};
 
 export default withRouter(MainContainer);

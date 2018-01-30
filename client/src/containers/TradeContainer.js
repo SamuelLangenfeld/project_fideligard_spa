@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import Trade from "../components/Trade";
 import formatMoney from "../helpers/formatMoney";
+import PropTypes from "prop-types";
+
 import {
   setStock,
   updateQuantity,
@@ -80,6 +82,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       alert("Invalid Trade");
     }
   };
+};
+
+TradeContainer.propTypes = {
+  match: PropTypes.object,
+  history: PropTypes.object
 };
 
 const TradeContainer = connect(mapStateToProps, mapDispatchToProps)(Trade);

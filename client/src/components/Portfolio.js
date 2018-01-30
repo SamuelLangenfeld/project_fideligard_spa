@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const Portfolio = props => {
   let portfolioStocks = props.portfolioStocks.map(stock => {
@@ -74,6 +74,10 @@ const Portfolio = props => {
       {portfolioTable}
     </div>
   );
+};
+
+Portfolio.propTypes = {
+  portfolioStocks: array
 };
 
 export default Portfolio;

@@ -55,5 +55,10 @@ export default Main;
 Main.propTypes = {
   selectRoute: PropTypes.func,
   symbol: PropTypes.string,
-  redirect: PropTypes.bool
+  redirect: PropTypes.bool,
+  isFetching: PropTypes.bool,
+  path: PropTypes.string,
+  dates: PropTypes.array,
+  setDateIndex: PropTypes.func,
+  dateIndex: PropTypes.number
 };

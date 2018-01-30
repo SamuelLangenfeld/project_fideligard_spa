@@ -3,6 +3,7 @@ import StocksContainer from "../containers/StocksContainer";
 import MainContainer from "../containers/MainContainer";
 import { BrowserRouter as Router } from "react-router-dom";
 import NavbarContainer from "../containers/NavbarContainer";
+import PropTypes from "prop-types";
 import "../App.css";
 
 const App = props => {
@@ -26,4 +27,7 @@ const App = props => {
   );
 };
 
+App.propTypes = {
+  balance: PropTypes.number
+};
 export default App;
