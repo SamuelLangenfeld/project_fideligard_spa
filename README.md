@@ -7,7 +7,8 @@ Historic stock data is gathered from the [Quandl API](https://www.quandl.com/).
 ![welcome screenshot](public/welcome.png)
 
 You can buy and sell stocks from the trade page. Adjust the slider to change the current date. Feel free to buy stocks at their
-low point, then time travel and sell at their highest! Your Portfolio will keep track of your investments as you move forward and backwards, as well as your cost basis and current profit/loss.
+low point, then time travel and sell at their highest! Your Portfolio will keep track of your investments as you move forward and backwards, as well as your cost basis and current profit/loss. If a stock price is marked with an "x" it means that stock price data is not available for that day (probably because it falls on a weekend or holiday).
+
 To look back on your amazingly farsighted decisions, click the link or selector to view your previous Transactions.
 Stock prices are shown along with their performance over the past day, past 7 days, and past 30 days.
 Just don't refresh the page or navigate away. None of your data will be saved and all your time traveling will be for nought.
