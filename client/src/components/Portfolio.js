@@ -77,7 +77,7 @@ const Portfolio = props => {
 };
 
 Portfolio.propTypes = {
-  portfolioStocks: array
+  portfolioStocks: PropTypes.array
 };
 
 export default Portfolio;

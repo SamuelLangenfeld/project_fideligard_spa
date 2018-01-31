@@ -22,7 +22,7 @@ const Navbar = ({ symbol }) => {
 };
 
 Navbar.propTypes = {
-  symbol: string
+  symbol: PropTypes.string
 };
 
 export default Navbar;

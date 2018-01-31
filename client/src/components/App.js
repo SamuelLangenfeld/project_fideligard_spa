@@ -28,6 +28,6 @@ const App = props => {
 };
 
 App.propTypes = {
-  balance: PropTypes.number
+  balance: PropTypes.string
 };
 export default App;

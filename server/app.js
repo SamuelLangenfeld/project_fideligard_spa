@@ -3,7 +3,8 @@ const app = express();
 const fs = require("fs");
 const fetch = require("isomorphic-fetch");
 const path = require("path");
-
+const promiseLimit = require("promise-limit");
+const limit = promiseLimit(1);
 // ----------------------------------------
 // App Variables
 // ----------------------------------------
@@ -98,7 +99,6 @@ app.get("/apiCall", (req, res, next) => {
   ];
 
   let promiseArray = [];
-  let time = 1;
   let date = new Date();
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
@@ -108,10 +108,9 @@ app.get("/apiCall", (req, res, next) => {
   let startDate = `${year - 1}-${month}-${day}`;
 
   symbols.forEach(symbol => {
-    time += 300;
     promiseArray.push(
-      new Promise((res, rej) => {
-        setTimeout(() => {
+      limit(() => {
+        return new Promise((res, rej) => {
           fetch(
             `https://www.quandl.com/api/v3/datasets/WIKI/${symbol}/data.json?trim_start=${startDate}&trim_end=${endDate}&api_key=${
               process.env.api_key
@@ -119,7 +118,7 @@ app.get("/apiCall", (req, res, next) => {
           )
             .then(results => results.json())
             .then(results => res(results));
-        }, time);
+        });
       })
     );
   });
@@ -128,7 +127,6 @@ app.get("/apiCall", (req, res, next) => {
     results.forEach((result, i) => {
       result.symbol = symbols[i];
     });
-    console.log("RECEIVED RESULTS");
     res.append("Access-Control-Allow-Origin", "*");
     res.json(results);
   });

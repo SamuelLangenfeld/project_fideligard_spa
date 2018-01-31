@@ -84,11 +84,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
+const TradeContainer = connect(mapStateToProps, mapDispatchToProps)(Trade);
+
 TradeContainer.propTypes = {
   match: PropTypes.object,
   history: PropTypes.object
 };
-
-const TradeContainer = connect(mapStateToProps, mapDispatchToProps)(Trade);
 
 export default TradeContainer;
