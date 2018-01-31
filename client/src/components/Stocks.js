@@ -24,7 +24,7 @@ class Stocks extends Component {
     });
 
     return (
-      <div style={{ border: "black 1px solid", padding: "10px" }}>
+      <div className="stocks-panel">
         <h3 className="route-display">Stocks</h3>
         <table className="table table-bordered table-striped">
           <thead>

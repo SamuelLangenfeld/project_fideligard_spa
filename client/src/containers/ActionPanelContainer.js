@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Main from "../components/Main";
+import ActionPanel from "../components/ActionPanel";
 import { withRouter } from "react-router-dom";
 import { setDate, setDateIndex } from "../actions";
 import PropTypes from "prop-types";
@@ -69,11 +69,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main);
+const ActionPanelContainer = connect(mapStateToProps, mapDispatchToProps)(
+  ActionPanel
+);
 
-MainContainer.propTypes = {
+ActionPanelContainer.propTypes = {
   location: PropTypes.object,
   history: PropTypes.object
 };
 
-export default withRouter(MainContainer);
+export default withRouter(ActionPanelContainer);

@@ -5,7 +5,7 @@ import TradeContainer from "../containers/TradeContainer";
 import TransactionsContainer from "../containers/TransactionsContainer";
 import PortfolioContainer from "../containers/PortfolioContainer";
 
-const Main = props => {
+const ActionPanel = props => {
   if (props.isFetching) {
     return <h2>Loading Historical Data...</h2>;
   }
@@ -50,9 +50,8 @@ const Main = props => {
     </div>
   );
 };
-export default Main;
 
-Main.propTypes = {
+ActionPanel.propTypes = {
   selectRoute: PropTypes.func,
   symbol: PropTypes.string,
   redirect: PropTypes.bool,
@@ -62,3 +61,5 @@ Main.propTypes = {
   setDateIndex: PropTypes.func,
   dateIndex: PropTypes.number
 };
+
+export default ActionPanel;

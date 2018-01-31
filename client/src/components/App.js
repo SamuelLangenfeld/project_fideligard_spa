@@ -1,6 +1,6 @@
 import React from "react";
 import StocksContainer from "../containers/StocksContainer";
-import MainContainer from "../containers/MainContainer";
+import ActionPanelContainer from "../containers/ActionPanelContainer";
 import { BrowserRouter as Router } from "react-router-dom";
 import NavbarContainer from "../containers/NavbarContainer";
 import PropTypes from "prop-types";
@@ -18,7 +18,7 @@ const App = props => {
               <StocksContainer />
             </div>
             <div className="col-md-7">
-              <MainContainer />
+              <ActionPanelContainer />
             </div>
           </div>
         </div>
